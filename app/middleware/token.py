@@ -10,7 +10,9 @@ class TokenMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         try:
             authorization: str = request.headers.get("Authorization")
+            # Gets the Headers "Authorization: Bearer <API_TOKEN>"
             scheme, token = get_authorization_scheme_param(authorization)
+            # Add in your token validation service here
             # token_service(token)
             response: Response = await call_next(request)
             return response

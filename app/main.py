@@ -12,7 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .middleware import TokenMiddleware
 from .api import (
-    endpoint_routes
+    endpoint_routes,
+    # other_routes
 )
 
 app = FastAPI(
@@ -40,6 +41,7 @@ app = FastAPI(
 )
 
 app.include_router(endpoint_routes)
+# app.include_router(other_routes)
 
 @app.middleware("http")
 async def verify_token(request: Request, call_next):
