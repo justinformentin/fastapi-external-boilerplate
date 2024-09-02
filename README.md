@@ -1,3 +1,11 @@
+## Why?
+
+I needed a quick way to create an API that I could deploy on my VPS. Nothing fancy, just a few endpoints that can be exposed publicly. 
+
+Every other boilerplate I found either used specific tools that I didn't want, were set up to be deployed a certain way, or weren't intended to be a public API.
+
+If you have similar needs, this is a good starting place. 
+
 ## Development
 
 1. Create and activate a virtualenv 
@@ -16,7 +24,9 @@ uvicorn main:app --reload --port 5000 --host 0.0.0.0
 
 If you are using any "one click" installers for platforms like vercel, linode, digitalocean, you will need to include another file outlined by that platform for running the server.
 
-If you are using apache, you will need to add a reverse proxy to your `sites-enabled/domain.com.conf` file:
+You will need to add a reverse proxy.
+
+For apache, to your `sites-enabled/domain.com.conf` file add:
 
 ```bash
     ProxyPreserveHost On
@@ -43,7 +53,7 @@ This is assuming your service provides some token, for example `xx_18d903jf093jf
 
 The `token.py` middleware file contains the check for the token, which should be in every request's `Authorization` header "Bearer" token.
 
-The `token_service` is a placeholder for your own service that checks the validity of the API token that gets sent in the headers.
+The `token_service(token)` is a placeholder for your own service that checks the validity of the API token that gets sent in the headers.
 
 ### Endpoints
 The `api` directory contains the files for each endpoint. You can make multiple files, one for each endpoint, and add them to the router in the `main.py` file.
